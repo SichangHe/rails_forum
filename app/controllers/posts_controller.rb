@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
+  before_action :assert_owner, only: %i[edit update destroy]
 
   # GET /posts or /posts.json
   def index
@@ -61,10 +62,15 @@ class PostsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
+    @is_post_owner = @post.user_id == current_user.id
   end
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:user_id, :content, :status, :tags).merge(user_id: current_user.id)
+    params.require(:post).permit(:content, :status, :tags).merge(user_id: current_user.id)
+  end
+
+  def assert_owner
+    render :edit, status: :unprocessable_entity unless @is_post_owner
   end
 end
