@@ -1,24 +1,54 @@
-# README
+# Steven He's experiment with Ruby on Rails for a forum
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## dependency
 
-Things you may want to cover:
+- Ruby on Rails 7.0.3
 
-* Ruby version
+## initialize
 
-* System dependencies
+`cd` here
 
-* Configuration
+```shell
+bundle
+./bin/rails db:migrate
+```
 
-* Database creation
+## development
 
-* Database initialization
+run the server and start tailwindcss
 
-* How to run the test suite
+```shell
+./bin/dev
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+the server will be available at port 3000
 
-* Deployment instructions
+the text editor I use on this project is visual studio code
 
-* ...
+### formatter
+
+- aliariff.vscode-erb-beautify
+- heybourn.headwind
+- DavidAnson.vscode-markdownlint
+- esbenp.prettier-vscode
+- castwide.solargraph
+
+### other extension
+
+- aaron-bond.better-comments
+- streetsidesoftware.code-spell-checker
+- kaiwood.endwise
+- usernamehw.errorlens
+- bung87.rails
+- rebornix.ruby
+- vortizhe.simple-ruby-erb
+- bradlc.vscode-tailwindcss
+- wingrunr21.vscode-ruby
+- bung87.vscode-gemfile
+- redhat.vscode-yaml
+
+### testing
+
+```shell
+./bin/rails test
+```
