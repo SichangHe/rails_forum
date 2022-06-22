@@ -1,18 +1,18 @@
 <div id="<%= dom_id post %>">
   <p class="my-5">
-    <strong class="block font-medium mb-1">User:</strong>
+    <strong class="block mb-1 font-medium">User:</strong>
     <%= post.user_id %>
   </p>
   <p class="my-5">
-    <strong class="block font-medium mb-1">Content:</strong>
+    <strong class="block mb-1 font-medium">Content:</strong>
     <%= post.content %>
   </p>
   <p class="my-5">
-    <strong class="block font-medium mb-1">Status:</strong>
+    <strong class="block mb-1 font-medium">Status:</strong>
     <%= post.status %>
   </p>
   <p class="my-5">
-    <strong class="block font-medium mb-1">Tags:</strong>
+    <strong class="block mb-1 font-medium">Tags:</strong>
     <%= post.tags %>
   </p>
   <% if action_name != "show" %>

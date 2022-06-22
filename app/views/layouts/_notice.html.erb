@@ -1,12 +1,12 @@
 <% if notice.present? || alert.present? %>
   <section class="flex justify-center font-medium rounded-lg">
     <% if notice.present? %>
-      <p class="px-3 py-2 text-green-500  mb-5inline-block bg-green-50" id="notice">
+      <p class="px-3 py-2 text-green-500 mb-5inline-block bg-green-50" id="notice">
         <%= notice %>
       </p>
     <% end %>
     <% if alert.present? %>
-      <p class="px-3 py-2 font-medium text-red-500 rounded-lg  mb-5inline-block bg-red-50" id="alert">
+      <p class="px-3 py-2 font-medium text-red-500 rounded-lg mb-5inline-block bg-red-50" id="alert">
         <%= alert %>
       </p>
     <% end %>
