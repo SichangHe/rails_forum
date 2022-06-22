@@ -1,7 +1,7 @@
 <header>
   <% if user_signed_in? %>
-    <%= button_to "Sign out", destroy_user_session_path, method: :delete  %>
+    <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "block px-5 py-3 font-medium text-center text-white bg-blue-600 rounded-lg"  %>
   <% else %>
-    <a href="users/sign_in">Sign in</a>
+    <a href="users/sign_in" class="block px-5 py-3 font-medium text-center text-white bg-blue-600 rounded-lg">Sign in</a>
   <% end %>
 </header>
