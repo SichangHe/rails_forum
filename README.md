@@ -2,6 +2,7 @@
 
 ## dependency
 
+- tailwindcss
 - Ruby on Rails 7.0.3
 
 ## initialize
@@ -52,3 +53,8 @@ the text editor I use on this project is visual studio code
 ```shell
 ./bin/rails test
 ```
+
+## database
+
+the database is sqlite3 for local development
+and PostgreSQL for production
