@@ -62,7 +62,7 @@ class PostsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
-    @is_post_owner = @post.user_id == current_user.id
+    @is_post_owner = current_user && @post.user_id == current_user.id
   end
 
   # Only allow a list of trusted parameters through.
