@@ -1,5 +1,30 @@
 class Post < ApplicationRecord
   belongs_to :user
 
-  enum status: %i[PUBLIC PROTECTED PRIVATE PUBLIC_ARCHIVED PROTECTED_ARCHIVED PRIVATE_ARCHIVED DELETED]
+  # status of the user
+  # ! only appending to the list allowed
+  enum status: %i[PUBLIC PROTECTED PRIVATE PUBLIC_ARCHIVED PROTECTED_ARCHIVED PRIVATE_ARCHIVED DELETED REPORTED]
+
+  # * status methods {
+  def public?
+    %w[PUBLIC PUBLIC_ARCHIVED].include? status
+  end
+
+  def mutable?
+    %w[PUBLIC PROTECTED PRIVATE].include? status
+  end
+
+  def private_visible?
+    %w[PUBLIC PROTECTED PRIVATE PUBLIC_ARCHIVED PROTECTED_ARCHIVED PRIVATE_ARCHIVED].include? status
+  end
+
+  def visible_to?(user)
+    if user.id == user_id
+      private_visible?
+    # TODO: protected
+    else
+      public?
+    end
+  end
+  # * } status methods
 end
