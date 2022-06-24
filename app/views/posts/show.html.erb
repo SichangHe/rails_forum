@@ -1,7 +1,7 @@
 <div class="flex w-full mx-auto md:w-2/3">
   <div class="mx-auto">
     <%= render @post %>
-    <% if @is_post_owner %>
+    <% if @post.mutable_to? current_user %>
       <%= link_to 'Edit this post', edit_post_path(@post), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
       <div class="inline-block ml-2">
         <%= button_to 'Destroy this post', post_path(@post), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>

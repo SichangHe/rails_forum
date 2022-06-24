@@ -26,5 +26,14 @@ class Post < ApplicationRecord
       public?
     end
   end
+
+  def mutable_to?(user)
+    if user
+      user.id == user_id
+    # TODO: protected
+    else
+      false
+    end
+  end
   # * } status methods
 end
