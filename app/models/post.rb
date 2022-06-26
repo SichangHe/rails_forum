@@ -19,7 +19,7 @@ class Post < ApplicationRecord
   end
 
   def visible_to?(user)
-    if user.id == user_id
+    if user && user.id == user_id
       private_visible?
     # TODO: protected
     else
