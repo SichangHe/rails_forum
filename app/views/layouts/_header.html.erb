@@ -1,7 +1,18 @@
-<header class="sticky top-0">
+<header class="sticky top-0 flex items-center justify-between w-full p-2 text-center bg-white rounded-lg shadow-md">
+  <nav>
+    <span class="px-2 text-2xl">
+      <%= link_to 'Home', root_path %>
+    </span>
+    <span class="px-2 text-xl">
+      <%= link_to 'Posts', posts_path %>
+    </span>
+  </nav>
+  <button class="">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+  </button>
   <% if user_signed_in? %>
-    <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: 'w-full block px-5 py-3 font-medium text-center text-white bg-blue-600 rounded-lg' %>
+    <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'block px-3 py-2 font-medium text-white bg-blue-600 rounded-lg' %>
   <% else %>
-    <a href="users/sign_in" class="block px-5 py-3 font-medium text-center text-white bg-blue-600 rounded-lg">Sign in</a>
+    <%= button_to 'Sign in', new_user_session_path, method: :get, class: 'block px-3 py-2 font-medium text-white bg-blue-600 rounded-lg' %>
   <% end %>
 </header>
