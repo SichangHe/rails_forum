@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
+  before_action :assert_visible, except: %i[index new create]
   before_action :assert_mutable, only: %i[edit update destroy]
 
   # GET /posts or /posts.json
@@ -69,7 +70,11 @@ class PostsController < ApplicationController
     params.require(:post).permit(:content, :status, :tags).merge(user_id: current_user.id)
   end
 
+  def assert_visible
+    redirect_to '/posts' unless @post.visible_to? current_user
+  end
+
   def assert_mutable
-    render :edit, status: :unprocessable_entity unless @post.mutable_to? current_user
+    redirect_to '/posts' unless @post.mutable_to? current_user
   end
 end
