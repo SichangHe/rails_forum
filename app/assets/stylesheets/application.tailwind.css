@@ -2,12 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
 @layer components {
-  .btn-primary {
-    @apply px-4 py-2 bg-blue-200;
-  }
+    .btn {
+        @apply rounded-lg cursor-pointer hover:shadow-sm;
+    }
+    .btn-sm {
+        @apply px-3 py-2 font-medium btn;
+    }
+    .btn-md {
+        @apply px-5 py-3 font-medium btn;
+    }
+    .btn-to-show {
+        @apply inline-block bg-gray-100 btn-md active:shadow-inner;
+    }
+    .btn-blue {
+        @apply text-white bg-blue-600 hover:shadow-lg active:bg-blue-700;
+    }
+    .btn-to-submit {
+        @apply btn-blue btn-md;
+    }
+    .btn-to-sign-in {
+        @apply block btn-blue btn-sm;
+    }
 }
-
-*/
