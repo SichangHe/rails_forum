@@ -1,7 +1,7 @@
 <div class="w-full">
   <div class="flex items-center justify-between">
     <h1 class="text-4xl font-bold">Posts</h1>
-    <%= link_to 'New post', new_post_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to 'New post', new_post_path, class: 'block btn-to-submit' %>
   </div>
   <div id="posts" class="min-w-full">
     <%= render @posts %>
