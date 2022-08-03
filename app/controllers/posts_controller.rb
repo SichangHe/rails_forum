@@ -60,7 +60,7 @@ class PostsController < ApplicationController
 
   # Changes of the post's content from recent to old
   def changes
-    @changes = @post.content.versions.reverse
+    @changes = @post.content.versions[1..].reverse
   end
 
   private

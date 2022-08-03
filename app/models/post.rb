@@ -41,6 +41,6 @@ class Post < ApplicationRecord
 
   # Number of content revisions
   def revisions
-    content.versions.length
+    content.versions.length - 1
   end
 end
