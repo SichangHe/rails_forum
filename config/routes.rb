@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :posts
+  get '/posts/:id/changes', to: 'posts#changes'
   devise_for :users, controllers: {
     confirmations: 'user/confirmations',
     passwords: 'user/passwords',

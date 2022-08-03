@@ -1,0 +1,24 @@
+<div id="<%= dom_id change %>">
+  <p class="my-5">
+    <%= change.created_at %>
+  </p>
+  <article class="prose">
+    <p class="my-5">
+      <strong>
+        <%= change.event %>
+      </strong>
+      by 
+      <% user = User.find(change.whodunnit) %>
+      <strong>
+        <%= user.name %>
+      </strong>
+      <em>
+        <%= user.email %>
+      </em>
+    </p>
+    <p class="my-5">
+      <%= change.reify %>
+    </p>
+  </article>
+  <hr class="mt-6">
+</div>

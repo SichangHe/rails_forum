@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_rich_text :content
+  has_paper_trail
 
   # status of the user
   # ! only appending to the list allowed
@@ -37,4 +38,9 @@ class Post < ApplicationRecord
     end
   end
   # * } status methods
+
+  # Number of content revisions
+  def revisions
+    content.versions.length
+  end
 end
