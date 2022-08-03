@@ -38,4 +38,9 @@ class Post < ApplicationRecord
     end
   end
   # * } status methods
+
+  # Number of content revisions
+  def revisions
+    content.versions.length
+  end
 end

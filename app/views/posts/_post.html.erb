@@ -11,7 +11,9 @@
       <strong>
         <%= post.user.name %>
       </strong>
-      <%= post.user.email %>
+      <em>
+        <%= post.user.email %>
+      </em>
     </p>
     <p class="my-5">
       <%= post.content %>
@@ -20,16 +22,24 @@
       <strong>Tags:</strong>
       <%= post.tags %>
     </p>
+    <p class="my-5">
+      Created: <%= post.created_at %>
+    </p>
   </article>
-  <% if action_name != "show" %>
+  <% if action_name == 'index' %>
     <%= link_to 'Show this post', post, class: 'btn-to-show' %>
     <% if post.mutable_to? current_user %>
       <%= link_to 'Edit this post', edit_post_path(post), class: 'ml-2 btn-to-show' %>
     <% end %>
     <hr class="mt-6">
-  <% elsif post.versions.length > 0 %>
-    <p>
-      Revisions: <%= post.versions.length %>
-    </p>
+  <% elsif action_name == 'show' %>
+    <% if post.revisions > 0 %>
+      <p>
+        <%= link_to "Revisions: #{post.revisions}", "#{post_path(@post)}/changes", class: 'underline' %>
+      </p>
+      <p>
+        Last revised: <%= post.updated_at %>
+      </p>
+    <% end %>
   <% end %>
 </div>
