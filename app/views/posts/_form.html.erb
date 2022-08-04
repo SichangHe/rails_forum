@@ -12,7 +12,7 @@
   <% end %>
   <div class="my-5">
     <%= form.label :title %>
-    <%= form.text_field :title, value: @post.title || '', class: 'block w-full px-3 py-2 mt-2 prose border border-gray-200 rounded-md shadow outline-none' %>
+    <%= form.text_field :title, value: @post.title == 'Untitled' && '' || @post.title, class: 'block w-full px-3 py-2 mt-2 prose border border-gray-200 rounded-md shadow outline-none' %>
   </div>
   <div class="my-5">
     <%= form.label :content %>
