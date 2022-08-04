@@ -1,0 +1,21 @@
+<div id="<%= dom_id post %>">
+  <article class="prose">
+    <p class="my-5">
+      <%= post.created_at %>
+    </p>
+    <h2 class="my-5 text-xl">
+      <%= link_to post.title, post %>
+    </h2>
+    <p class="my-5">
+      <%= render 'users/preview', user: post.user %>
+    </p>
+    <p class="my-5">
+      <%= post.content.to_plain_text.truncate(160) %>
+    </p>
+    <p class="my-5">
+      <strong>Tags:</strong>
+      <%= post.tags %>
+    </p>
+  </article>
+  <hr class="mt-6">
+</div>

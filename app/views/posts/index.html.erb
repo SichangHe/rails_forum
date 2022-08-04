@@ -4,6 +4,8 @@
     <%= link_to 'New post', new_post_path, class: 'block btn-to-submit' %>
   </div>
   <div id="posts" class="min-w-full">
-    <%= render @posts %>
+    <% @posts.each do |post| %>
+      <%= render 'preview', post: post %>
+    <% end %>
   </div>
 </div>
