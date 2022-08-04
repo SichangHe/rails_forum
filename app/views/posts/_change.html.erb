@@ -9,12 +9,7 @@
       </strong>
       by 
       <% user = User.find(change.whodunnit) %>
-      <strong>
-        <%= user.name %>
-      </strong>
-      <em>
-        <%= user.email %>
-      </em>
+      <%= render 'users/preview', user: user %>
     </p>
     <p class="my-5">
       <%= change.reify %>

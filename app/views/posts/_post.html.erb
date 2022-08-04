@@ -11,12 +11,7 @@
       </p>
     <% end %>
     <p class="my-5">
-      <strong>
-        <%= post.user.name %>
-      </strong>
-      <em>
-        <%= post.user.email %>
-      </em>
+      <%= render 'users/preview', user: post.user %>
     </p>
     <p class="my-5">
       <%= post.content %>
@@ -40,7 +35,7 @@
       <p>
         <%= link_to "Revisions: #{post.revisions}", "#{post_path(@post)}/changes", class: 'underline' %>
       </p>
-      <p>
+      <p class="my-5">
         Last revised: <%= post.updated_at %>
       </p>
     <% end %>

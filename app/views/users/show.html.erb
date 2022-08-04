@@ -1,0 +1,17 @@
+<div class="flex w-full mx-auto md:w-2/3">
+  <div class="mx-auto">
+    <p class="my-5 text-2xl">
+      <%= @user.name %>
+    </p>
+    <em class="my-5">
+      <%= @user.email %>
+    </em>
+    <p class="my-5 ">
+      <%= @user.xp %> xp
+    </p>
+    <% if @user == current_user %>
+      <%= link_to 'Edit my user', @user.edit_path, class: 'mt-2 btn-to-show' %>
+      <%= link_to 'Edit my user information', @user.edit_info_path, class: 'ml-2 btn-to-show' %>
+    <% end %>
+  </div>
+</div>
