@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, except: %i[index new create]
   before_action :authenticate_user!, except: %i[index show]
   before_action :assert_visible, except: %i[index new create]
   before_action :assert_mutable, only: %i[edit update destroy]
@@ -56,6 +56,11 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # Changes of the post's content from recent to old
+  def changes
+    @changes = @post.content.versions.reverse
   end
 
   private

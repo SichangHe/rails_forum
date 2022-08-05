@@ -10,7 +10,10 @@
 `cd` here
 
 ```shell
+gem install solargraph 
+gem install solargraph-rails --version 1.0.0.pre.1
 bundle
+solargraph bundle
 ./bin/rails db:migrate
 ```
 
