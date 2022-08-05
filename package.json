@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "local-time": "^2.1.0"
+  }
+}
