@@ -3,6 +3,9 @@
     <h1 class="text-4xl font-bold">History</h1>
     <%= link_to 'Go back to post', post_path(@post), class: 'block btn-to-show' %>
   </div>
+  <h2 class="text-2xl">
+    <%= @post.title %>
+  </h2>
   <div id="changes" class="min-w-full">
     <%= render partial: 'change', collection: @changes %>
   </div>

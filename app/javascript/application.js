@@ -3,3 +3,9 @@ import "@hotwired/turbo-rails";
 import "controllers";
 import "trix";
 import "@rails/actiontext";
+import hljs from "highlight.js";
+hljs.configure({ cssSelector: "pre" });
+document.addEventListener("turbo:load", () => {
+    hljs.highlightAll();
+    MathJax.typeset();
+});

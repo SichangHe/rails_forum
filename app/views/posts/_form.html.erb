@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "actiontext", "data-turbo-track": "reload" %>
 <%= form_with(model: post, class: 'contents') do |form| %>
   <% if post.errors.any? %>
     <div id="error_explanation" class="px-3 py-2 mt-3 font-medium text-red-500 rounded-lg bg-red-50">
@@ -10,6 +11,10 @@
     </div>
   <% end %>
   <div class="my-5">
+    <%= form.label :title %>
+    <%= form.text_field :title, value: @post.title == 'Untitled' && '' || @post.title, class: 'block w-full px-3 py-2 mt-2 prose border border-gray-200 rounded-md shadow outline-none' %>
+  </div>
+  <div class="my-5">
     <%= form.label :content %>
     <%= form.rich_text_area :content, rows: 4, class: 'block w-full px-3 py-2 mt-2 prose border border-gray-200 rounded-md shadow outline-none' %>
   </div>
@@ -19,7 +24,7 @@
   </div>
   <div class="my-5">
     <%= form.label :tags %>
-    <%= form.text_area :tags, rows: 4, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>
+    <%= form.text_field :tags, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>
   </div>
   <div class="inline">
     <%= form.submit class: 'inline-block btn-to-submit' %>

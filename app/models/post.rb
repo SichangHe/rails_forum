@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_rich_text :content
   has_paper_trail
+  acts_as_votable
 
   # status of the user
   # ! only appending to the list allowed
@@ -41,6 +42,21 @@ class Post < ApplicationRecord
 
   # Number of content revisions
   def revisions
-    content.versions.length
+    content.versions.length - 1
+  end
+
+  # Path to like
+  def like_path
+    "/posts/#{id}/like"
+  end
+
+  # Path to dislike
+  def dislike_path
+    "/posts/#{id}/dislike"
+  end
+
+  # Path to display votes
+  def votes_path
+    "/posts/#{id}/votes"
   end
 end

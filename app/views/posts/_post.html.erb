@@ -1,5 +1,8 @@
 <div id="<%= dom_id post %>">
   <article class="prose">
+    <h2 class="my-5 text-2xl">
+      <%= post.title %>
+    </h2>
     <% if post.status != "PUBLIC" %>
       <p class="my-5">
         <strong>
@@ -8,38 +11,26 @@
       </p>
     <% end %>
     <p class="my-5">
-      <strong>
-        <%= post.user.name %>
-      </strong>
-      <em>
-        <%= post.user.email %>
-      </em>
+      <%= render 'users/preview', user: post.user %>
     </p>
+    <%= post.content %>
     <p class="my-5">
-      <%= post.content %>
-    </p>
-    <p class="my-5">
-      <strong>Tags:</strong>
-      <%= post.tags %>
+      <%= render 'votes', post: post %>
+      <span class="mx-3">
+        <strong>Tags:</strong>
+        <%= post.tags %>
+      </span>
     </p>
     <p class="my-5">
       Created: <%= post.created_at %>
     </p>
   </article>
-  <% if action_name == 'index' %>
-    <%= link_to 'Show this post', post, class: 'btn-to-show' %>
-    <% if post.mutable_to? current_user %>
-      <%= link_to 'Edit this post', edit_post_path(post), class: 'ml-2 btn-to-show' %>
-    <% end %>
-    <hr class="mt-6">
-  <% elsif action_name == 'show' %>
-    <% if post.revisions > 0 %>
-      <p>
-        <%= link_to "Revisions: #{post.revisions}", "#{post_path(@post)}/changes", class: 'underline' %>
-      </p>
-      <p>
-        Last revised: <%= post.updated_at %>
-      </p>
-    <% end %>
+  <% if post.revisions > 0 %>
+    <p>
+      <%= link_to "Revisions: #{post.revisions}", "#{post_path(@post)}/changes", class: 'underline' %>
+    </p>
+    <p class="my-5">
+      Last revised: <%= post.updated_at %>
+    </p>
   <% end %>
 </div>

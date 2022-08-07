@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
   before_action :set_post, except: %i[index new create]
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show votes]
   before_action :assert_visible, except: %i[index new create]
   before_action :assert_mutable, only: %i[edit update destroy]
+  before_action :assert_votable, only: %i[like dislike]
 
   # GET /posts or /posts.json
   def index
@@ -60,7 +61,29 @@ class PostsController < ApplicationController
 
   # Changes of the post's content from recent to old
   def changes
-    @changes = @post.content.versions.reverse
+    @changes = @post.content.versions[1..].reverse
+  end
+
+  def votes; end
+
+  def like
+    @post.undisliked_by current_user if current_user.disliked? @post
+    if current_user.liked? @post
+      @post.unliked_by current_user
+    else
+      @post.liked_by current_user
+    end
+    redirect_to @post.votes_path
+  end
+
+  def dislike
+    @post.unliked_by current_user if current_user.liked? @post
+    if current_user.disliked? @post
+      @post.undisliked_by current_user
+    else
+      @post.disliked_by current_user
+    end
+    redirect_to @post.votes_path
   end
 
   private
@@ -72,11 +95,15 @@ class PostsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:content, :status, :tags).merge(user_id: current_user.id)
+    params.require(:post).permit(:title, :content, :status, :tags).merge(user_id: current_user.id)
   end
 
   def assert_visible
     redirect_to '/posts' unless @post.visible_to? current_user
+  end
+
+  def assert_votable
+    # TODO: decide based on user level
   end
 
   def assert_mutable
