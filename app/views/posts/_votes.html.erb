@@ -1,8 +1,17 @@
 <%= turbo_frame_tag id="#{dom_id(post)}_votes" do %>
   <span class="mx-3">
     <%= post.get_likes.length %>
-    <%= link_to '⇧', post.like_path %>
+    <% if current_user
+      like_class = current_user.liked?(post)? 'bg-gray-200' : ''
+      dislike_class = current_user.disliked?(post)? 'bg-gray-200' : ''
+      likes = link_to '⇧', post.like_path, class: like_class
+      dislikes = link_to '⇩', post.dislike_path, class: dislike_class
+    else
+      likes = '⇧'
+      dislikes = '⇩'
+    end %>
+    <%= likes %>
     <%= post.get_dislikes.length %>
-    <%= link_to '⇩', post.dislike_path %>
+    <%= dislikes %>
   </span>
 <% end %>
