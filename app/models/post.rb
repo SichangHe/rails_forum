@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_rich_text :content
   has_paper_trail
+  acts_as_votable
 
   # status of the user
   # ! only appending to the list allowed
