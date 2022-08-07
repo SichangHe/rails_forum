@@ -54,6 +54,9 @@ gem 'devise', '~>4.8'
 # Save model versions
 gem 'paper_trail', '~> 12.3'
 
+# Upvote/downvote on posts and comments
+gem 'acts_as_votable', '~> 0.13.2'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
