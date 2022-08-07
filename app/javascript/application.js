@@ -5,4 +5,7 @@ import "trix";
 import "@rails/actiontext";
 import hljs from "highlight.js";
 hljs.configure({ cssSelector: "pre" });
-hljs.highlightAll();
+document.addEventListener("turbo:load", () => {
+    hljs.highlightAll();
+    MathJax.typeset();
+});
