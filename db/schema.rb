@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_803_112_042) do
+ActiveRecord::Schema[7.0].define(version: 20_220_807_070_433) do
   create_table 'action_text_rich_texts', force: :cascade do |t|
     t.string 'name', null: false
     t.text 'body'
@@ -82,6 +82,23 @@ ActiveRecord::Schema[7.0].define(version: 20_220_803_112_042) do
     t.text 'object', limit: 1_073_741_823
     t.datetime 'created_at'
     t.index %w[item_type item_id], name: 'index_versions_on_item_type_and_item_id'
+  end
+
+  create_table 'votes', force: :cascade do |t|
+    t.string 'votable_type', null: false
+    t.integer 'votable_id', null: false
+    t.string 'voter_type', null: false
+    t.integer 'voter_id', null: false
+    t.boolean 'vote_flag', null: false
+    t.string 'vote_scope'
+    t.integer 'vote_weight'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index %w[votable_id votable_type vote_scope],
+            name: 'index_votes_on_votable_id_and_votable_type_and_vote_scope'
+    t.index %w[votable_type votable_id], name: 'index_votes_on_votable'
+    t.index %w[voter_id voter_type vote_scope], name: 'index_votes_on_voter_id_and_voter_type_and_vote_scope'
+    t.index %w[voter_type voter_id], name: 'index_votes_on_voter'
   end
 
   add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
