@@ -13,8 +13,11 @@
       <%= post.content.to_plain_text.truncate(160) %>
     </p>
     <p class="my-5">
-      <strong>Tags:</strong>
-      <%= post.tags %>
+      <%= render 'votes', post: post %>
+      <span class="mx-3">
+        <strong>Tags:</strong>
+        <%= post.tags %>
+      </span>
     </p>
   </article>
   <hr class="mt-6">

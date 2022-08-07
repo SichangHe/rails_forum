@@ -1,0 +1,8 @@
+<%= turbo_frame_tag id="#{dom_id(post)}_votes" do %>
+  <span class="mx-3">
+    <%= post.get_likes.length %>
+    <%= link_to '⇧', post.like_path %>
+    <%= post.get_dislikes.length %>
+    <%= link_to '⇩', post.dislike_path %>
+  </span>
+<% end %>

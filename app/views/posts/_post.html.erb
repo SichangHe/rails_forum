@@ -13,12 +13,13 @@
     <p class="my-5">
       <%= render 'users/preview', user: post.user %>
     </p>
+    <%= post.content %>
     <p class="my-5">
-      <%= post.content %>
-    </p>
-    <p class="my-5">
-      <strong>Tags:</strong>
-      <%= post.tags %>
+      <%= render 'votes', post: post %>
+      <span class="mx-3">
+        <strong>Tags:</strong>
+        <%= post.tags %>
+      </span>
     </p>
     <p class="my-5">
       Created: <%= post.created_at %>

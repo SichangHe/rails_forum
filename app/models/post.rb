@@ -44,4 +44,19 @@ class Post < ApplicationRecord
   def revisions
     content.versions.length - 1
   end
+
+  # Path to like
+  def like_path
+    "/posts/#{id}/like"
+  end
+
+  # Path to dislike
+  def dislike_path
+    "/posts/#{id}/dislike"
+  end
+
+  # Path to display votes
+  def votes_path
+    "/posts/#{id}/votes"
+  end
 end

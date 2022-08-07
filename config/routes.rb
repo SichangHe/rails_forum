@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :posts
   get '/posts/:id/changes', to: 'posts#changes'
+  get '/posts/:id/votes', to: 'posts#votes'
+  get '/posts/:id/like', to: 'posts#like'
+  get '/posts/:id/dislike', to: 'posts#dislike'
   devise_for :users, controllers: {
     confirmations: 'user/confirmations',
     passwords: 'user/passwords',
