@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_808_025_861) do
+ActiveRecord::Schema[7.0].define(version: 20_220_808_030_803) do
   create_table 'action_text_rich_texts', force: :cascade do |t|
     t.string 'name', null: false
     t.text 'body'
@@ -56,7 +56,6 @@ ActiveRecord::Schema[7.0].define(version: 20_220_808_025_861) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.string 'title', default: 'Untitled', null: false
-    t.string 'tags'
     t.index ['user_id'], name: 'index_posts_on_user_id'
   end
 
