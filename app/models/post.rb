@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   has_rich_text :content
   has_paper_trail
   acts_as_votable
+  acts_as_ordered_taggable
+  acts_as_ordered_taggable_on :tags
 
   # status of the user
   # ! only appending to the list allowed

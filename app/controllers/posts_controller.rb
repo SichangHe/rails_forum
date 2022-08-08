@@ -95,7 +95,7 @@ class PostsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:title, :content, :status, :tags).merge(user_id: current_user.id)
+    params.require(:post).permit(:title, :content, :status, :tag_list).merge(user_id: current_user.id)
   end
 
   def assert_visible
