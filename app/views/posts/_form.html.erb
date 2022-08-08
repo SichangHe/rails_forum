@@ -23,8 +23,9 @@
     <%= form.select :status, options_for_select(%i[PUBLIC PRIVATE]), {prompt: "choose visibility"}, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>
   </div>
   <div class="my-5">
-    <%= form.label :tags %>
-    <%= form.text_field :tags, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>
+    <%= form.label :tag_list %>
+    (separated by spaces)
+    <%= form.text_field :tag_list, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>
   </div>
   <div class="inline">
     <%= form.submit class: 'inline-block btn-to-submit' %>
