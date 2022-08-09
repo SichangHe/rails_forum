@@ -7,8 +7,11 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
+    @page_size = 16
+    @offset = params[:offset]&.to_i || 0
     @posts = Post.order(created_at: :desc)
-                 .limit(16)
+                 .limit(@page_size)
+                 .offset(@page_size * @offset)
                  .includes(:user, :tags, :votes_for)
                  .with_rich_text_content
                  .select { |post| post.visible_to? current_user }

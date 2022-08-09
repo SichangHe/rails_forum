@@ -19,9 +19,13 @@ const check_for_tex = async () => {
 };
 
 hljs.configure({ cssSelector: "pre" });
-document.addEventListener("turbo:load", () => {
+
+const highlight_and_math = () => {
     if (!document.baseURI.match("/edit")) {
         check_for_tex();
         hljs.highlightAll();
     }
-});
+};
+
+document.addEventListener("turbo:load", highlight_and_math);
+document.addEventListener("turbo:frame-load", highlight_and_math);
