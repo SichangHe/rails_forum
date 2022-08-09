@@ -4,8 +4,24 @@ import "controllers";
 import "trix";
 import "@rails/actiontext";
 import hljs from "highlight.js";
+
+const check_for_tex = async () => {
+    if (document.body.textContent.match(/(?:\$|\\\(|\\\[|\\begin\{.*?})/)) {
+        if (document.getElementById("MathJax-script") == null) {
+            let script = document.createElement("script");
+            script.async = true;
+            script.id = "MathJax-script";
+            script.src =
+                "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+            document.head.appendChild(script);
+        } else MathJax.typeset();
+    }
+};
+
 hljs.configure({ cssSelector: "pre" });
 document.addEventListener("turbo:load", () => {
-    hljs.highlightAll();
-    MathJax.typeset();
+    if (!document.baseURI.match("/edit")) {
+        check_for_tex();
+        hljs.highlightAll();
+    }
 });

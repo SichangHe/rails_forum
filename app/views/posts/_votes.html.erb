@@ -1,6 +1,7 @@
 <%= turbo_frame_tag id="#{dom_id(post)}_votes" do %>
   <span class="mx-3">
-    <%= post.get_likes.length %>
+    <% likes_count = post.votes_for.count(&:vote_flag) %>
+    <%= likes_count %>
     <% if current_user
       like_class = current_user.liked?(post)? 'bg-gray-200' : ''
       dislike_class = current_user.disliked?(post)? 'bg-gray-200' : ''
@@ -11,7 +12,7 @@
       dislikes = '⇩'
     end %>
     <%= likes %>
-    <%= post.get_dislikes.length %>
+    <%= post.votes_for.length - likes_count %>
     <%= dislikes %>
   </span>
 <% end %>
