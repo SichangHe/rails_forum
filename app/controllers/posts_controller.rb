@@ -14,7 +14,8 @@ class PostsController < ApplicationController
                  .offset(@page_size * @offset)
                  .includes(:user, :tags, :votes_for)
                  .with_rich_text_content
-                 .select { |post| post.visible_to? current_user }
+    @has_more_posts = @posts.length == @page_size
+    @posts = @posts.select { |post| post.visible_to? current_user }
   end
 
   # GET /posts/1 or /posts/1.json
