@@ -16,7 +16,7 @@
       <%= render 'votes', post: post %>
       <span class="mx-3">
         <strong>Tags:</strong>
-        <%= post.tag_list %>
+        <%= post.tags.map(&:name).join(' ') %>
       </span>
     </p>
   </article>
