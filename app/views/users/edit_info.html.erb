@@ -5,12 +5,12 @@
   <%= form_for(:user, url: '/users/update_info', method: :patch) do |form| %>
     <div class="my-5">
       <%= form.label :name %>
-      <%= form.text_field :name, value: current_user.name, class: 'block w-full px-3 py-2 mt-2 prose border border-gray-200 rounded-md shadow outline-none' %>
+      <%= form.text_field :name, value: current_user.name, class: 'form text_field' %>
     </div>
     <div class="my-5">
       <%= form.label :avatar %>
       <%= render 'big_avatar', user: current_user %>
-      <%= form.file_field :avatar, class: 'block w-full px-3 py-2 mt-2' %>
+      <%= form.file_field :avatar, class: 'form' %>
     </div>
     <div class="inline">
       <%= form.submit class: 'inline-block btn-to-submit' %>

@@ -24,4 +24,10 @@
     .btn-to-sign-in {
         @apply block btn-blue btn-sm;
     }
+    .form {
+        @apply block w-full px-3 py-2 mt-2;
+    }
+    .text_field {
+        @apply prose border border-gray-200 rounded-md shadow outline-none;
+    }
 }
