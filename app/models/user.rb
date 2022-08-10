@@ -9,12 +9,4 @@ class User < ApplicationRecord
   def path
     "/users/#{id}"
   end
-
-  def edit_info_path
-    '/users/edit_info'
-  end
-
-  def edit_path
-    '/users/edit'
-  end
 end
