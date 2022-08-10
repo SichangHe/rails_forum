@@ -12,20 +12,20 @@
   <% end %>
   <div class="my-5">
     <%= form.label :title %>
-    <%= form.text_field :title, value: @post.title == 'Untitled' && '' || @post.title, class: 'block w-full px-3 py-2 mt-2 prose border border-gray-200 rounded-md shadow outline-none' %>
+    <%= form.text_field :title, value: @post.title == 'Untitled' && '' || @post.title, class: 'form text_field' %>
   </div>
   <div class="my-5">
     <%= form.label :content %>
-    <%= form.rich_text_area :content, rows: 4, class: 'block w-full px-3 py-2 mt-2 prose border border-gray-200 rounded-md shadow outline-none' %>
+    <%= form.rich_text_area :content, rows: 4, class: 'form text_field' %>
   </div>
   <div class="my-5">
     <%= form.label :status %>
-    <%= form.select :status, options_for_select(%i[PUBLIC PRIVATE]), {prompt: "choose visibility"}, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>
+    <%= form.select :status, options_for_select(%i[PUBLIC PRIVATE]), {prompt: "choose visibility"}, class: 'form text_field' %>
   </div>
   <div class="my-5">
     <%= form.label :tag_list %>
     (separated by spaces)
-    <%= form.text_field :tag_list, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>
+    <%= form.text_field :tag_list, class: 'form text_field' %>
   </div>
   <div class="inline">
     <%= form.submit class: 'inline-block btn-to-submit' %>

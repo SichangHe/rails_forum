@@ -1,0 +1,5 @@
+<% begin %>
+  <%= image_tag user.avatar, class: 'w-32 h-32 rounded-full' %>
+  <% rescue %>
+  <span class="w-32 h-32 rounded-full "></span>
+<% end %>

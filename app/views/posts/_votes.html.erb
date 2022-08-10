@@ -3,8 +3,16 @@
     <% likes_count = post.votes_for.count(&:vote_flag) %>
     <%= likes_count %>
     <% if current_user
-      like_class = current_user.liked?(post)? 'bg-gray-200' : ''
-      dislike_class = current_user.disliked?(post)? 'bg-gray-200' : ''
+      current_user_vote = post.votes_for.find { |vote| vote.voter_id == current_user.id }
+      like_class = ''
+      dislike_class = ''
+      if current_user_vote
+        if current_user_vote.vote_flag
+          like_class = 'bg-gray-200'
+        else
+          dislike_class = 'bg-gray-200'
+        end
+      end
       likes = link_to '⇧', post.like_path, class: like_class
       dislikes = link_to '⇩', post.dislike_path, class: dislike_class
     else

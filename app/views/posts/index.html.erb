@@ -3,9 +3,21 @@
     <h1 class="text-4xl font-bold">Posts</h1>
     <%= link_to 'New post', new_post_path, class: 'block btn-to-submit' %>
   </div>
-  <div id="posts" class="min-w-full">
-    <% @posts.each do |post| %>
-      <%= render 'preview', post: post %>
+  <%= turbo_frame_tag "#{@offset}offset", target: "#{@offset += 1}offset" do %>
+    <div id="posts" class="min-w-full">
+      <% @posts.each do |post| %>
+        <%= render 'preview', post: post %>
+      <% end %>
+    </div>
+    <% if @has_more_posts %>
+      <div class="flex items-center min-w-full">
+        <a href="/posts?offset=<%= @offset %>" class="min-w-full text-center border-b text-md">Show more</a>
+      </div>
+      <%= turbo_frame_tag "#{@offset}offset", target: "#{@offset += 1}offset" %>
+    <% else %>
+      <div class="flex items-center min-w-full">
+        <p class="min-w-full py-5 text-lg text-center">No more posts.</p>
+      </div>
     <% end %>
-  </div>
+  <% end %>
 </div>

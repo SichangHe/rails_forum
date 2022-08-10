@@ -4,16 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   acts_as_voter
+  has_one_attached :avatar
 
   def path
     "/users/#{id}"
-  end
-
-  def edit_info_path
-    '/users/edit_info'
-  end
-
-  def edit_path
-    '/users/edit'
   end
 end

@@ -1,5 +1,6 @@
-<a href="<%= user.path %>">
-  <strong>
+<a href="<%= user.path %>" class="flex">
+  <%= render 'users/small_avatar', user: user %>
+  <strong class="px-3">
     <%= user.name %>
   </strong>
   <em>

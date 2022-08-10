@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     unlocks: 'user/unlocks'
   }
   get '/users/edit_info', to: 'users#edit_info'
+  patch '/users/update_info', to: 'users#update_info'
   get '/users/:id', to: 'users#show'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
