@@ -1,4 +1,25 @@
-<h2 class="text-4xl">
-  Edit my user information
-</h2>
-To be added…
+<article>
+  <h2 class="text-4xl">
+    Edit my user information
+  </h2>
+  <%= form_for(:user, url: '/users/update_info', method: :patch) do |form| %>
+    <div class="my-5">
+      <%= form.label :name %>
+      <%= form.text_field :name, value: current_user.name, class: 'block w-full px-3 py-2 mt-2 prose border border-gray-200 rounded-md shadow outline-none' %>
+    </div>
+    <div class="my-5">
+      <%= form.label :avatar %>
+      <% begin %>
+        <%= image_tag current_user.avatar, class: 'w-32 h-32 rounded-full' %>
+        <% rescue %>
+      <% end %>
+      <%= form.file_field :avatar, class: 'block w-full px-3 py-2 mt-2' %>
+    </div>
+    <div class="inline">
+      <%= form.submit class: 'inline-block btn-to-submit' %>
+    </div>
+    <div class="inline">
+      <%= link_to 'Cancel', current_user.path, class: 'ml-2 inline-block btn-to-show' %>
+    </div>
+  <% end %>
+</article>
