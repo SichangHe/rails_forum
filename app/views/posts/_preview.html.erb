@@ -1,4 +1,4 @@
-<div id="<%= dom_id post %>">
+<%= turbo_frame_tag dom_id(post), target: '_top' do %>
   <article class="prose">
     <p class="my-5">
       <%= post.created_at %>
@@ -21,4 +21,4 @@
     </p>
   </article>
   <hr class="mt-6">
-</div>
+<% end %>
