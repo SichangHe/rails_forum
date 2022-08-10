@@ -9,10 +9,7 @@
     </div>
     <div class="my-5">
       <%= form.label :avatar %>
-      <% begin %>
-        <%= image_tag current_user.avatar, class: 'w-32 h-32 rounded-full' %>
-        <% rescue %>
-      <% end %>
+      <%= render 'big_avatar', user: current_user %>
       <%= form.file_field :avatar, class: 'block w-full px-3 py-2 mt-2' %>
     </div>
     <div class="inline">

@@ -14,9 +14,5 @@
       <%= link_to 'Edit my user information', users_edit_info_path, class: 'ml-2 btn-to-show' %>
     <% end %>
   </div>
-  <% begin %>
-    <%= image_tag @user.avatar, class: 'w-32 h-32 rounded-full' %>
-    <p class="w-32 h-32 rounded-full "></p>
-    <% rescue %>
-  <% end %>
+  <%= render 'big_avatar', user: @user %>
 </div>
