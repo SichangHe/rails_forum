@@ -29,3 +29,6 @@ const highlight_and_math = () => {
 
 document.addEventListener("turbo:load", highlight_and_math);
 document.addEventListener("turbo:frame-load", highlight_and_math);
+
+import LocalTime from "local-time";
+LocalTime.start();
