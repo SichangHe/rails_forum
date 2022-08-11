@@ -14,7 +14,8 @@ gem install solargraph
 gem install solargraph-rails --version 1.0.0.pre.1
 bundle
 solargraph bundle
-./bin/rails db:migrate
+./bin/rails db:prepare
+rubocop -a
 ```
 
 ## development
@@ -36,6 +37,9 @@ the text editor I use on this project is visual studio code
 - DavidAnson.vscode-markdownlint
 - esbenp.prettier-vscode
 - castwide.solargraph
+
+The configuration for the formatters are in `.vscode/settings`,
+so please always open the workspace at root level to get the consistent formatting.
 
 ### other extension
 
