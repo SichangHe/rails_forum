@@ -1,9 +1,8 @@
 class CommentsController < ApplicationController
-  ONLY_SET_COMMENTABLE = %i[index new create].freeze
-
-  before_action :set_comment, except: ONLY_SET_COMMENTABLE
+  before_action :set_comment, except: %i[index new create]
   before_action :authenticate_user!, except: %i[index show votes]
-  before_action :set_commentable, only: ONLY_SET_COMMENTABLE
+  before_action :set_commentable, only: %i[index new]
+  before_action :assert_mutable, only: %i[edit update destroy]
 
   # GET /comments or /comments.json
   def index
@@ -17,6 +16,8 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = Comment.new
+    @comment.commentable_id = @commentable_id
+    @comment.commentable_type = @commentable_type
   end
 
   # GET /comments/1/edit
@@ -78,5 +79,9 @@ class CommentsController < ApplicationController
     params.require(:comment)
           .permit(:commentable_id, :commentable_type, :content, :status)
           .reverse_merge(user_id: current_user.id)
+  end
+
+  def assert_mutable
+    redirect_to @comment unless @comment.mutable_to? current_user
   end
 end

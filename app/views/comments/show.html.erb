@@ -1,10 +1,11 @@
 <%= turbo_frame_tag dom_id @comment do %>
   <div class="w-full mx-auto">
     <%= render @comment %>
-    <%= link_to 'Edit this comment', edit_comment_path(@comment), class: 'mt-2 btn-to-show' %>
-    <div class="inline-block ml-2">
-      <%= button_to 'Destroy this comment', comment_path(@comment), method: :delete, class: 'mt-2 btn-to-show' %>
-    </div>
-    <%= link_to 'Back to comments', comments_path, class: 'mt-2 btn-to-show' %>
+    <% if @comment.mutable_to? current_user %>
+      <%= link_to 'Edit this comment', edit_comment_path(@comment), class: 'mt-2 btn-to-show' %>
+      <div class="inline-block ml-2">
+        <%= button_to 'Destroy this comment', comment_path(@comment), method: :delete, class: 'mt-2 btn-to-show' %>
+      </div>
+    <% end %>
   </div>
 <% end %>

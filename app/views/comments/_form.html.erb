@@ -1,8 +1,4 @@
 <%= stylesheet_link_tag "actiontext", "data-turbo-track": "reload" %>
-<% if comment
-commentable_id = comment.commentable_id
-commentable_type = comment.commentable_type 
-end %>
 <%= form_with(model: comment, class: 'inline') do |form| %>
   <% if comment.errors.any? %>
     <div id="error_explanation" class="px-3 py-2 mt-3 font-medium text-red-500 rounded-lg bg-red-50">
@@ -14,8 +10,8 @@ end %>
       </ul>
     </div>
   <% end %>
-  <%= form.hidden_field :commentable_id, value: commentable_id %>
-  <%= form.hidden_field :commentable_type, value: commentable_type %>
+  <%= form.hidden_field :commentable_id %>
+  <%= form.hidden_field :commentable_type %>
   <div class="my-5">
     <%= form.label :content %>
     <%= form.rich_text_area :content, rows: 2, class: 'form text_field' %>

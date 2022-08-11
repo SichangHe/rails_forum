@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   get '/users/:id', to: 'users#show'
   resources :comments
   get '/comments/:commentable_type/:commentable_id/new', to: 'comments#new'
-  get '/comments/:commentable_type/:commentable_id/edit', to: 'comments#edit'
   get '/comments/:commentable_type/:commentable_id', to: 'comments#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
