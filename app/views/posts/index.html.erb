@@ -16,7 +16,7 @@
       <%= turbo_frame_tag "#{@offset}offset", target: "#{@offset += 1}offset" %>
     <% else %>
       <div class="flex items-center min-w-full">
-        <p class="min-w-full py-5 text-lg text-center">No more posts.</p>
+        <p class="min-w-full py-5 text-lg text-center">You have reached the bottom.</p>
       </div>
     <% end %>
   <% end %>

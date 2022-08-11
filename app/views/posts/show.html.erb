@@ -9,12 +9,19 @@
     <% end %>
     <%= link_to 'Back to posts', posts_path, class: 'ml-2 btn-to-show' %>
   </div>
-  <%= turbo_frame_tag 'new_comment_button', target: 'new_comment' do %>
-    <div class="flex items-center justify-between py-8">
-      <h2 class="text-2xl font-bold">Comments</h2>
-      <%= link_to 'New comment', @post.new_comments_path, class: 'block btn-to-submit' %>
-    </div>
-    <%= turbo_frame_tag 'new_comment' %>
+  <% if current_user %>
+    <%= turbo_frame_tag 'new_comment_button', target: 'new_comment' do %>
+      <div class="flex items-center justify-between py-8">
+        <h2 class="text-2xl font-bold"><%= @post.comments.length %> comments</h2>
+        <%= link_to 'New comment', @post.new_comments_path, class: 'block btn-to-submit' %>
+      </div>
+      <%= turbo_frame_tag 'new_comment' %>
+    <% end %>
+  <% else %>
+    <p class="mx-auto my-5">
+      You need to <%= link_to 'sign in', new_user_session_path, class: 'text-blue-600' %> to comment.
+    </p>
+    <h2 class="text-2xl font-bold"><%= @post.comments.length %> comments</h2>
   <% end %>
   <%= turbo_frame_tag 'comments0offset', src: @post.comments_path, target: 'comments1offset' %>
 </div>
