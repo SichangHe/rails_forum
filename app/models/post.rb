@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   acts_as_votable
   acts_as_ordered_taggable
   acts_as_ordered_taggable_on :tags
+  has_many :comments, as: :commentable
 
   # status of the user
   # ! only appending to the list allowed
