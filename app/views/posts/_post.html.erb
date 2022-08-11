@@ -22,7 +22,7 @@
       </span>
     </p>
     <p class="my-5">
-      Created: <%= post.created_at %>
+      Created: <%= time_tag post.created_at, "data-local": "time-ago" %>
     </p>
   </article>
   <% if post.revisions > 0 %>
@@ -30,7 +30,7 @@
       <%= link_to "Revisions: #{post.revisions}", "#{post_path(@post)}/changes", class: 'underline' %>
     </p>
     <p class="my-5">
-      Last revised: <%= post.updated_at %>
+      Last revised: <%= time_tag post.updated_at, "data-local": "time-ago" %>
     </p>
   <% end %>
 </div>

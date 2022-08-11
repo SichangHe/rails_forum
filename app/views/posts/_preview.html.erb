@@ -1,7 +1,7 @@
 <%= turbo_frame_tag dom_id(post), target: '_top' do %>
   <article class="prose">
     <p class="my-5">
-      <%= post.created_at %>
+      <%= time_tag post.created_at, "data-local": "time-ago" %>
     </p>
     <h2 class="my-5 text-xl">
       <%= link_to post.title, post %>
