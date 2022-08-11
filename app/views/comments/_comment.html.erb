@@ -1,22 +1,17 @@
-<div id="<%= dom_id comment %>">
+<article class="prose">
+  <% if comment.status && comment.status != "PUBLIC" %>
+    <p class="my-5">
+      <strong>
+        <%= comment.status %>
+      </strong>
+    </p>
+  <% end %>
   <p class="my-5">
-    <strong class="block font-medium mb-1">User:</strong>
-    <%= comment.user_id %>
+    <%= render 'users/preview', user: comment.user %>
   </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Commentable:</strong>
-    <%= comment.commentable_id %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Status:</strong>
-    <%= comment.status %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this comment", comment, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this comment', edit_comment_path(comment), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+  <%= comment.content %>
+  <% if action_name != 'show' %>
+    <%= link_to 'Edit this comment', edit_comment_path(comment), class: 'btn-to-submit' %>
     <hr class="mt-6">
   <% end %>
-</div>
+</article>

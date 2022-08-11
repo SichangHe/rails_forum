@@ -1,9 +1,14 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[show edit update destroy]
+  ONLY_SET_COMMENTABLE = %i[index new create].freeze
+
+  before_action :set_comment, except: ONLY_SET_COMMENTABLE
+  before_action :authenticate_user!, except: %i[index show votes]
+  before_action :set_commentable, only: ONLY_SET_COMMENTABLE
 
   # GET /comments or /comments.json
   def index
-    @comments = Comment.all
+    @comments = Comment.order(created_at: :desc)
+                       .where(commentable_id: @commentable_id, commentable_type: @commentable_type)
   end
 
   # GET /comments/1 or /comments/1.json
@@ -62,8 +67,16 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
   end
 
+  # Set commentable's id and type
+  def set_commentable
+    @commentable_id = params[:commentable_id]
+    @commentable_type = params[:commentable_type]
+  end
+
   # Only allow a list of trusted parameters through.
   def comment_params
-    params.require(:comment).permit(:user_id, :commentable_id, :status)
+    params.require(:comment)
+          .permit(:commentable_id, :commentable_type, :content, :status)
+          .reverse_merge(user_id: current_user.id)
   end
 end

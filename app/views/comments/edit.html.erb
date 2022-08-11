@@ -1,8 +1,9 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">Editing comment</h1>
-
-  <%= render "form", comment: @comment %>
-
-  <%= link_to "Show this comment", @comment, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  <%= link_to "Back to comments", comments_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-</div>
+<%= turbo_frame_tag dom_id @comment do %>
+  <div class="w-full mx-auto">
+    <p class="my-5">
+      <%= render 'users/preview', user: @comment.user %>
+    </p>
+    <%= render 'form', comment: @comment %>
+    <%= link_to 'Cancel', @comment, class: 'ml-2 btn-to-show' %>
+  </div>
+<% end %>

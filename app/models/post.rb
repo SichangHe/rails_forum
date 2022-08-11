@@ -62,4 +62,14 @@ class Post < ApplicationRecord
   def votes_path
     "/posts/#{id}/votes"
   end
+
+  # Path to show comments
+  def comments_path
+    "/comments/Post/#{id}"
+  end
+
+  # Path to new comment
+  def new_comments_path
+    "/comments/Post/#{id}/new"
+  end
 end

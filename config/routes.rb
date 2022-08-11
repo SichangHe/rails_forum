@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  resources :posts do
-    resources :comments
-  end
+  resources :posts
   get '/posts/:id/changes', to: 'posts#changes'
   get '/posts/:id/votes', to: 'posts#votes'
   get '/posts/:id/like', to: 'posts#like'
@@ -16,6 +14,10 @@ Rails.application.routes.draw do
   get '/users/edit_info', to: 'users#edit_info'
   patch '/users/update_info', to: 'users#update_info'
   get '/users/:id', to: 'users#show'
+  resources :comments
+  get '/comments/:commentable_type/:commentable_id/new', to: 'comments#new'
+  get '/comments/:commentable_type/:commentable_id/edit', to: 'comments#edit'
+  get '/comments/:commentable_type/:commentable_id', to: 'comments#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
