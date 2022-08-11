@@ -1,4 +1,5 @@
-<%= turbo_frame_tag "comments#{@offset}offset", target: "comments#{@offset += 1}offset" do %>
+<%= turbo_frame_tag comment_dom_id(@commentable_type, @commentable_id, @offset),
+target: comment_dom_id(@commentable_type, @commentable_id, @offset += 1) do %>
   <div class="min-w-full p-5 border rounded-lg">
     <% @comments.each do |comment| %>
       <%= render 'show', comment: comment %>
@@ -9,10 +10,7 @@
       <a href="<%= "/comments/#{@commentable_type}/#{@commentable_id}?offset=#{@offset}" %>"
       class="min-w-full text-center text-md">Show more</a>
     </div>
-    <%= turbo_frame_tag "comments#{@offset}offset", target: "comments#{@offset += 1}offset" %>
-  <% else %>
-    <div class="flex items-center min-w-full">
-      <p class="min-w-full py-5 text-lg text-center">You have reached the bottom.</p>
-    </div>
+    <%= turbo_frame_tag comment_dom_id(@commentable_type, @commentable_id, @offset),
+      target: comment_dom_id(@commentable_type, @commentable_id, @offset += 1) %>
   <% end %>
 <% end %>
