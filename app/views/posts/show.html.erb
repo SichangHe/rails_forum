@@ -16,5 +16,5 @@
     </div>
     <%= turbo_frame_tag 'new_comment' %>
   <% end %>
-  <%= turbo_frame_tag 'comments', src: @post.comments_path %>
+  <%= turbo_frame_tag 'comments0offset', src: @post.comments_path, target: 'comments1offset' %>
 </div>

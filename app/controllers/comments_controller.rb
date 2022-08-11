@@ -6,8 +6,16 @@ class CommentsController < ApplicationController
 
   # GET /comments or /comments.json
   def index
-    @comments = Comment.order(created_at: :desc)
-                       .where(commentable_id: @commentable_id, commentable_type: @commentable_type)
+    @page_size = 16
+    @offset = params[:offset]&.to_i || 0
+    @comments = Comment
+                .order(created_at: :desc)
+                .where(commentable_id: @commentable_id, commentable_type: @commentable_type)
+                .limit(@page_size)
+                .offset(@page_size * @offset)
+                .includes(:user, :votes_for)
+                .with_rich_text_content
+    @has_more_comments = @comments.length == @page_size
   end
 
   # GET /comments/1 or /comments/1.json

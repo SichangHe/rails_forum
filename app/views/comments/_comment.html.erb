@@ -10,8 +10,4 @@
     <%= render 'users/preview', user: comment.user %>
   </p>
   <%= comment.content %>
-  <% if action_name != 'show' %>
-    <%= link_to 'Edit this comment', edit_comment_path(comment), class: 'btn-to-submit' %>
-    <hr class="mt-6">
-  <% end %>
 </article>
