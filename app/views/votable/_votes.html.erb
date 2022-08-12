@@ -1,3 +1,4 @@
+<%# To use this partial, the object needs to have `votes_for`, `like_path`, and `dislike_path` %>
 <%= turbo_frame_tag id="#{dom_id(votable)}_votes" do %>
   <span class="mx-3">
     <% likes_count = votable.votes_for.count(&:vote_flag) %>

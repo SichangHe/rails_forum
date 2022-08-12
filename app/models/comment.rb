@@ -11,6 +11,11 @@ class Comment < ApplicationRecord
     user1 && user == user1
   end
 
+  # Number of content revisions
+  def revisions
+    content.versions.length - 1
+  end
+
   # Path to create new comment to comment
   def new_comments_path
     "/comments/Comment/#{id}/new"
