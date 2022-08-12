@@ -1,0 +1,9 @@
+<%= turbo_frame_tag dom_id @comment do %>
+  <div class="w-full mx-auto">
+    <p class="my-5">
+      <%= render 'users/preview', user: @comment.user %>
+    </p>
+    <%= render 'form', comment: @comment %>
+    <%= link_to 'Cancel', @comment, class: 'ml-2 btn-to-show' %>
+  </div>
+<% end %>

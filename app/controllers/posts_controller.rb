@@ -72,26 +72,25 @@ class PostsController < ApplicationController
     @changes = @post.content.versions[1..].reverse
   end
 
-  def votes; end
+  def votes
+    vote_type = params[:vote_type]
+    return if vote_type.nil?
 
-  def like
-    @post.undisliked_by current_user if current_user.disliked? @post
-    if current_user.liked? @post
-      @post.unliked_by current_user
-    else
-      @post.liked_by current_user
+    if vote_type == 'like'
+      @post.undisliked_by current_user if current_user.disliked? @post
+      if current_user.liked? @post
+        @post.unliked_by current_user
+      else
+        @post.liked_by current_user
+      end
+    elsif vote_type == 'dislike'
+      @post.unliked_by current_user if current_user.liked? @post
+      if current_user.disliked? @post
+        @post.undisliked_by current_user
+      else
+        @post.disliked_by current_user
+      end
     end
-    redirect_to @post.votes_path
-  end
-
-  def dislike
-    @post.unliked_by current_user if current_user.liked? @post
-    if current_user.disliked? @post
-      @post.undisliked_by current_user
-    else
-      @post.disliked_by current_user
-    end
-    redirect_to @post.votes_path
   end
 
   private
@@ -107,7 +106,7 @@ class PostsController < ApplicationController
   end
 
   def assert_visible
-    redirect_to '/posts' unless @post.visible_to? current_user
+    redirect_to posts_path unless @post.visible_to? current_user
   end
 
   def assert_votable
@@ -115,6 +114,6 @@ class PostsController < ApplicationController
   end
 
   def assert_mutable
-    redirect_to '/posts' unless @post.mutable_to? current_user
+    redirect_to @post unless @post.mutable_to? current_user
   end
 end

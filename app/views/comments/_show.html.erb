@@ -1,0 +1,34 @@
+<% base_id = dom_id comment
+  comments_num = Comment
+    .where(commentable_type: 'Comment', commentable_id: comment.id).length %>
+<%= turbo_frame_tag base_id do %>
+  <div class="w-full mx-auto">
+    <%= render comment %>
+    <div class="mt-2 text-right">
+      <% if comments_num.positive? %>
+        <%= turbo_frame_tag "#{base_id}_comments_button",
+          target: comment_dom_id('Comment', comment.id, 0) do %>
+          <%= link_to pluralize(comments_num, 'comment'),
+            comment.comments_path, class: 'mr-2 text-blue-600 click-disable' %>
+        <% end %>
+      <% end %>
+      <% if comment.mutable_to? current_user %>
+        <%= link_to 'Edit', edit_comment_path(comment),
+          class: 'text-blue-600' %>
+        <div class="inline-block m-2">
+          <%= button_to 'Delete', comment_path(comment), method: :delete,
+            class: 'text-blue-600' %>
+        </div>
+      <% end %>
+      <% if current_user; new_comment = new_comment_dom_id('Comment', comment.id) %>
+        <%= turbo_frame_tag "#{base_id}new_comment_button",
+        target: new_comment do %>
+          <%= link_to 'Reply', comment.new_comments_path, class: 'text-blue-600' %>
+          <%= turbo_frame_tag new_comment, class: 'text-left' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <%= turbo_frame_tag comment_dom_id('Comment', comment.id, 0),
+    target: comment_dom_id('Comment', comment.id, 1) %>
+<% end %>

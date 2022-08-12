@@ -1,0 +1,18 @@
+<article class="prose">
+  <% if comment.status && comment.status != "PUBLIC" %>
+    <p class="my-5">
+      <strong>
+        <%= comment.status %>
+      </strong>
+    </p>
+  <% end %>
+  <p class="flex justify-between my-5">
+    <%= render 'users/preview', user: comment.user %>
+    <%= time_tag comment.created_at, 'data-local': 'time-ago' %>
+  </p>
+  <%= comment.content %>
+  <%= render 'votable/votes', votable: comment %>
+  <% if comment.revisions > 0 %>
+    <span>Edited: <%= time_tag comment.updated_at, 'data-local': 'time-ago' %></span>
+  <% end %>
+</article>

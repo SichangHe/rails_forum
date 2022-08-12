@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   acts_as_votable
   acts_as_ordered_taggable
   acts_as_ordered_taggable_on :tags
+  has_many :comments, as: :commentable
 
   # status of the user
   # ! only appending to the list allowed
@@ -49,16 +50,21 @@ class Post < ApplicationRecord
 
   # Path to like
   def like_path
-    "/posts/#{id}/like"
+    "/posts/#{id}/votes?vote_type=like"
   end
 
   # Path to dislike
   def dislike_path
-    "/posts/#{id}/dislike"
+    "/posts/#{id}/votes?vote_type=dislike"
   end
 
-  # Path to display votes
-  def votes_path
-    "/posts/#{id}/votes"
+  # Path to show comments
+  def comments_path
+    "/comments/Post/#{id}"
+  end
+
+  # Path to new comment
+  def new_comments_path
+    "/comments/Post/#{id}/new"
   end
 end

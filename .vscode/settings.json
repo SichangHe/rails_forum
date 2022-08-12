@@ -9,6 +9,9 @@
         "*.erb": "erb"
     },
     "files.autoSave": "onFocusChange",
+    "headwind.classRegex": {
+        "erb": "\\bclass\\s*[=:]\\s*[\\\"\\']([\\._a-zA-Z0-9\\s\\-\\:\\/]+)[\\\"\\']",
+    },
     // markdown
     "markdown-preview-enhanced.breakOnSingleNewLine": false,
     "markdown.extension.orderedList.marker": "one",

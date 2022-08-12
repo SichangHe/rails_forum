@@ -1,5 +1,5 @@
-<div class="flex w-full mx-auto md:w-2/3">
-  <div class="mx-auto">
+<div class="flex flex-col w-full mx-auto">
+  <div class="w-full mx-auto">
     <%= render @post %>
     <% if @post.mutable_to? current_user %>
       <%= link_to 'Edit this post', edit_post_path(@post), class: 'mt-2 btn-to-show' %>
@@ -9,4 +9,24 @@
     <% end %>
     <%= link_to 'Back to posts', posts_path, class: 'ml-2 btn-to-show' %>
   </div>
+  <% comments_num = pluralize @post.comments.length, 'comments'
+    if current_user
+      new_comment = new_comment_dom_id('Post', @post.id) %>
+  <%= turbo_frame_tag 'new_comment_button', target: new_comment do %>
+    <div class="flex items-center justify-between py-8">
+      <h2 class="text-2xl font-bold"><%= comments_num %></h2>
+      <%= link_to 'New comment', @post.new_comments_path, class: 'block btn-to-submit' %>
+    </div>
+    <%= turbo_frame_tag new_comment %>
+  <% end %>
+<% else %>
+  <p class="mx-auto my-5">
+    You need to <%= link_to 'sign in', new_user_session_path, class: 'text-blue-600' %> to comment.
+  </p>
+  <h2 class="text-2xl font-bold"><%= comments_num %></h2>
+<% end %>
+<%= turbo_frame_tag comment_dom_id('Post', @post.id, 0),
+  src: @post.comments_path,
+  target: comment_dom_id('Post', @post.id, 1) do %>
+<% end %>
 </div>

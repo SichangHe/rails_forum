@@ -11,13 +11,9 @@
     </div>
     <% if @has_more_posts %>
       <div class="flex items-center min-w-full">
-        <a href="/posts?offset=<%= @offset %>" class="min-w-full text-center border-b text-md">Show more</a>
+        <a href="/posts?offset=<%= @offset %>" class="min-w-full text-center border-b click-hide text-md">Show more</a>
       </div>
       <%= turbo_frame_tag "#{@offset}offset", target: "#{@offset += 1}offset" %>
-    <% else %>
-      <div class="flex items-center min-w-full">
-        <p class="min-w-full py-5 text-lg text-center">No more posts.</p>
-      </div>
     <% end %>
   <% end %>
 </div>

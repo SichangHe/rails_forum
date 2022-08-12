@@ -1,7 +1,7 @@
 <%= turbo_frame_tag dom_id(post), target: '_top' do %>
   <article class="prose">
     <p class="my-5">
-      <%= time_tag post.created_at, "data-local": "time-ago" %>
+      <%= time_tag post.created_at, 'data-local': 'time-ago' %>
     </p>
     <h2 class="my-5 text-xl">
       <%= link_to post.title, post %>
@@ -13,7 +13,7 @@
       <%= post.content.to_plain_text.truncate(160) %>
     </p>
     <p class="my-5">
-      <%= render 'votes', post: post %>
+      <%= render 'votable/votes', votable: post %>
       <span class="mx-3">
         <strong>Tags:</strong>
         <%= post.tags.map(&:name).join(' ') %>
