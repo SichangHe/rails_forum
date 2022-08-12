@@ -73,7 +73,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.update("comment_#{@comment.id}", '')
+          turbo_stream.replace(@comment, '<em>Comment deleted.</em>')
         ]
       end
       format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
