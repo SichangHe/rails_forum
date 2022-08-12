@@ -50,12 +50,12 @@ class Post < ApplicationRecord
 
   # Path to like
   def like_path
-    "/posts/#{id}/like"
+    "/posts/#{id}/votes?vote_type=like"
   end
 
   # Path to dislike
   def dislike_path
-    "/posts/#{id}/dislike"
+    "/posts/#{id}/votes?vote_type=dislike"
   end
 
   # Path to display votes
