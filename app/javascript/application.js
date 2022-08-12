@@ -20,15 +20,19 @@ const check_for_tex = async () => {
 
 hljs.configure({ cssSelector: "pre" });
 
-const highlight_and_math = () => {
+const load_check = () => {
     if (!document.baseURI.match("/edit")) {
         check_for_tex();
         hljs.highlightAll();
     }
+    const click_hides = document.getElementsByClassName("click-hide");
+    for (const e of click_hides) {
+        e.addEventListener("click", () => (e.style.display = "none"));
+    }
 };
 
-document.addEventListener("turbo:load", highlight_and_math);
-document.addEventListener("turbo:frame-load", highlight_and_math);
+document.addEventListener("turbo:load", load_check);
+document.addEventListener("turbo:frame-load", load_check);
 
 import LocalTime from "local-time";
 LocalTime.start();
