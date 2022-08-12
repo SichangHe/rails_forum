@@ -51,6 +51,13 @@ const load_check = () => {
     for (const e of click_hides) {
         e.addEventListener("click", () => (e.style.display = "none"));
     }
+    const click_disable = document.getElementsByClassName("click-disable");
+    for (const e of click_disable) {
+        e.addEventListener("click", () => {
+            e.style.pointerEvents = "none";
+            e.classList.add("text-gray-600");
+        });
+    }
 };
 
 document.addEventListener("turbo:load", load_check);

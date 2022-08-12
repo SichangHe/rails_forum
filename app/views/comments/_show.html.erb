@@ -9,7 +9,7 @@
         <%= turbo_frame_tag "#{base_id}_comments_button",
           target: comment_dom_id('Comment', comment.id, 0) do %>
           <%= link_to pluralize(comments_num, 'comment'),
-            comment.comments_path, class: 'mr-2 text-blue-600' %>
+            comment.comments_path, class: 'mr-2 text-blue-600 click-disable' %>
         <% end %>
       <% end %>
       <% if comment.mutable_to? current_user %>
