@@ -3,7 +3,12 @@ import "@hotwired/turbo-rails";
 import "controllers";
 import "trix";
 import "@rails/actiontext";
-import hljs from "highlight.js";
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const wait_for_variable = async (variable) => {
+    while (!window.hasOwnProperty(variable)) await delay(100);
+};
 
 const check_for_tex = async () => {
     if (document.body.textContent.match(/(?:\$|\\\(|\\\[|\\begin\{.*?})/)) {
@@ -18,12 +23,29 @@ const check_for_tex = async () => {
     }
 };
 
-hljs.configure({ cssSelector: "pre" });
+const check_for_highlight = async () => {
+    const code_blocks = document.querySelectorAll("pre:not([class])");
+    if (code_blocks.length > 0) {
+        if (document.getElementById("Highlight-js") == null) {
+            let script = document.createElement("script");
+            script.async = true;
+            script.id = "Highlight-js";
+            script.src =
+                "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js";
+            document.head.appendChild(script);
+            await wait_for_variable("hljs");
+            hljs.configure({ cssSelector: "pre" });
+        }
+        for (const code_block of code_blocks) {
+            hljs.highlightElement(code_block);
+        }
+    }
+};
 
 const load_check = () => {
     if (!document.baseURI.match("/edit")) {
         check_for_tex();
-        hljs.highlightAll();
+        check_for_highlight();
     }
     const click_hides = document.getElementsByClassName("click-hide");
     for (const e of click_hides) {
