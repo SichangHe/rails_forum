@@ -1,9 +1,9 @@
-<%= turbo_frame_tag id="#{dom_id(post)}_votes" do %>
+<%= turbo_frame_tag id="#{dom_id(votable)}_votes" do %>
   <span class="mx-3">
-    <% likes_count = post.votes_for.count(&:vote_flag) %>
+    <% likes_count = votable.votes_for.count(&:vote_flag) %>
     <%= likes_count %>
     <% if current_user
-      current_user_vote = post.votes_for.find { |vote| vote.voter_id == current_user.id }
+      current_user_vote = votable.votes_for.find { |vote| vote.voter_id == current_user.id }
       like_class = ''
       dislike_class = ''
       if current_user_vote
@@ -13,14 +13,14 @@
           dislike_class = 'bg-gray-200'
         end
       end
-      likes = link_to '⇧', post.like_path, class: like_class
-      dislikes = link_to '⇩', post.dislike_path, class: dislike_class
+      likes = link_to '⇧', votable.like_path, class: like_class
+      dislikes = link_to '⇩', votable.dislike_path, class: dislike_class
     else
       likes = '⇧'
       dislikes = '⇩'
     end %>
     <%= likes %>
-    <%= post.votes_for.length - likes_count %>
+    <%= votable.votes_for.length - likes_count %>
     <%= dislikes %>
   </span>
 <% end %>

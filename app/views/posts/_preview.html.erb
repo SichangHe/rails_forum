@@ -13,7 +13,7 @@
       <%= post.content.to_plain_text.truncate(160) %>
     </p>
     <p class="my-5">
-      <%= render 'votes', post: post %>
+      <%= render 'votable/votes', votable: post %>
       <span class="mx-3">
         <strong>Tags:</strong>
         <%= post.tags.map(&:name).join(' ') %>

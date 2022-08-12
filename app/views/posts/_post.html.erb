@@ -15,7 +15,7 @@
     </p>
     <%= post.content %>
     <p class="my-5">
-      <%= render 'votes', post: post %>
+      <%= render 'votable/votes', votable: post %>
       <span class="mx-3">
         <strong>Tags:</strong>
         <%= post.tag_list %>
