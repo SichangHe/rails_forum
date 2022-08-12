@@ -37,6 +37,13 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update(new_comment_dom_id(@comment.commentable_type, @comment.commentable_id), ''),
+            turbo_stream.prepend("#{comment_dom_id(@comment.commentable_type, @comment.commentable_id, 0)}_comments",
+                                 partial: 'comments/show', locals: { comment: @comment })
+          ]
+        end
         format.html { redirect_to comment_url(@comment), notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
@@ -64,6 +71,11 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.update("comment_#{@comment.id}", '')
+        ]
+      end
       format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
