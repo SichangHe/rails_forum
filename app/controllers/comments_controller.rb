@@ -69,6 +69,27 @@ class CommentsController < ApplicationController
     end
   end
 
+  def votes
+    vote_type = params[:vote_type]
+    return if vote_type.nil?
+
+    if vote_type == 'like'
+      @comment.undisliked_by current_user if current_user.disliked? @comment
+      if current_user.liked? @comment
+        @comment.unliked_by current_user
+      else
+        @comment.liked_by current_user
+      end
+    elsif vote_type == 'dislike'
+      @comment.unliked_by current_user if current_user.liked? @comment
+      if current_user.disliked? @comment
+        @comment.undisliked_by current_user
+      else
+        @comment.disliked_by current_user
+      end
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

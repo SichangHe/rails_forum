@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   patch '/users/update_info', to: 'users#update_info'
   get '/users/:id', to: 'users#show'
   resources :comments
+  get '/comments/:id/votes', to: 'comments#votes'
   get '/comments/:commentable_type/:commentable_id/new', to: 'comments#new'
   get '/comments/:commentable_type/:commentable_id', to: 'comments#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

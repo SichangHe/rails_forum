@@ -10,4 +10,5 @@
     <%= render 'users/preview', user: comment.user %>
   </p>
   <%= comment.content %>
+  <%= render 'votable/votes', votable: comment %>
 </article>

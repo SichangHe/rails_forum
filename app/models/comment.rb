@@ -20,6 +20,16 @@ class Comment < ApplicationRecord
   def comments_path
     "/comments/Comment/#{id}"
   end
+
+  # Path to like
+  def like_path
+    "/comments/#{id}/votes?vote_type=like"
+  end
+
+  # Path to dislike
+  def dislike_path
+    "/comments/#{id}/votes?vote_type=dislike"
+  end
 end
 
 # DOM id for comment used in index page

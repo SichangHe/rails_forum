@@ -58,11 +58,6 @@ class Post < ApplicationRecord
     "/posts/#{id}/votes?vote_type=dislike"
   end
 
-  # Path to display votes
-  def votes_path
-    "/posts/#{id}/votes"
-  end
-
   # Path to show comments
   def comments_path
     "/comments/Post/#{id}"
