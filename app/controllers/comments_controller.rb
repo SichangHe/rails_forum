@@ -123,6 +123,6 @@ class CommentsController < ApplicationController
   end
 
   def assert_mutable
-    redirect_to @comment unless @comment.mutable_to? current_user
+    redirect_to @comment, alert: 'Permission denied.' unless @comment.mutable_to? current_user
   end
 end
