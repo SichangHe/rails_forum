@@ -1,11 +1,11 @@
 # Steven He's experiment with Ruby on Rails for a forum
 
-## dependency
+## Dependency
 
-- tailwindcss
+- Tailwindcss
 - Ruby on Rails 7.0.3
 
-## initialize
+## Initialize
 
 `cd` here
 
@@ -18,19 +18,19 @@ solargraph bundle
 rubocop -a
 ```
 
-## development
+## Development
 
-run the server and start tailwindcss
+Run the server and start tailwindcss
 
 ```shell
 ./bin/dev
 ```
 
-the server will be available at port 3000
+The server will be available at port 3000
 
-the text editor I use on this project is visual studio code
+The text editor I use on this project is visual studio code
 
-### formatter
+### Formatter
 
 - aliariff.vscode-erb-beautify
 - heybourn.headwind
@@ -41,7 +41,7 @@ the text editor I use on this project is visual studio code
 The configuration for the formatters are in `.vscode/settings`,
 so please always open the workspace at root level to get the consistent formatting.
 
-### other extension
+### Other extension
 
 - aaron-bond.better-comments
 - streetsidesoftware.code-spell-checker
@@ -55,13 +55,13 @@ so please always open the workspace at root level to get the consistent formatti
 - bung87.vscode-gemfile
 - redhat.vscode-yaml
 
-### testing
+### Testing
 
 ```shell
 ./bin/rails test
 ```
 
-## database
+## Database
 
-the database is sqlite3 for local development
+The database is sqlite3 for local development
 and PostgreSQL for production

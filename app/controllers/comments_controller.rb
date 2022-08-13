@@ -37,6 +37,13 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update(new_comment_dom_id(@comment.commentable_type, @comment.commentable_id), ''),
+            turbo_stream.prepend("#{comment_dom_id(@comment.commentable_type, @comment.commentable_id, 0)}_comments",
+                                 partial: 'comments/show', locals: { comment: @comment })
+          ]
+        end
         format.html { redirect_to comment_url(@comment), notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
@@ -50,7 +57,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to comment_url(@comment), notice: 'Comment was successfully updated.' }
+        format.html { redirect_to comment_url(@comment) }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -64,6 +71,11 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace(@comment, '<em>Comment deleted.</em>')
+        ]
+      end
       format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
@@ -111,6 +123,6 @@ class CommentsController < ApplicationController
   end
 
   def assert_mutable
-    redirect_to @comment unless @comment.mutable_to? current_user
+    redirect_to @comment, alert: 'Permission denied.' unless @comment.mutable_to? current_user
   end
 end
