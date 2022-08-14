@@ -6,14 +6,17 @@ class PostsController < ApplicationController
   before_action :assert_votable, only: %i[like dislike]
 
   # GET /posts or /posts.json
+  # TODO: fix search offset
   def index
     @page_size = 16
     @offset = params[:offset]&.to_i || 0
-    @posts = Post.order(created_at: :desc)
-                 .limit(@page_size)
-                 .offset(@page_size * @offset)
-                 .includes(:user, :tags, :votes_for)
-                 .with_rich_text_content
+    @q = Post.ransack(params[:q])
+    @posts = @q.result
+               .order(created_at: :desc)
+               .limit(@page_size)
+               .offset(@page_size * @offset)
+               .includes(:user, :tags, :votes_for)
+               .with_rich_text_content
     @has_more_posts = @posts.length == @page_size
     @posts = @posts.select { |post| post.visible_to? current_user }
   end
