@@ -34,6 +34,9 @@
       <% end %>
     </div>
   </div>
-  <%= turbo_frame_tag comment_dom_id('Comment', comment.id, 0),
-    target: comment_dom_id('Comment', comment.id, 1) %>
+  <% base_id = comment_dom_id('Comment', comment.id, 0) %>
+  <%= turbo_frame_tag base_id,
+    target: comment_dom_id('Comment', comment.id, 1) do %>
+    <span id="<%= base_id %>_comments" class="min-w-full p-5 border rounded-lg empty:hidden"></span>
+  <% end %>
 <% end %>

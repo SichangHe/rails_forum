@@ -117,7 +117,7 @@ class PostsController < ApplicationController
   end
 
   def assert_visible
-    redirect_to posts_path unless @post.visible_to? current_user
+    redirect_to posts_path, alert: 'Permission denied.' unless @post.visible_to? current_user
   end
 
   def assert_votable
@@ -125,6 +125,6 @@ class PostsController < ApplicationController
   end
 
   def assert_mutable
-    redirect_to @post unless @post.mutable_to? current_user
+    redirect_to @post, alert: 'Permission denied.' unless @post.mutable_to? current_user
   end
 end

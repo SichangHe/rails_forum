@@ -14,6 +14,16 @@ Fork this repository,
 work on your fork,
 and submit a pull request.
 
+### Fetch Upstream
+
+After you fetch upstream from your fork,
+you want to run
+
+```shell
+bundle
+./bin/rails db:migrate
+```
+
 ## Style Guide
 
 Please use the formatters mentioned in the [README](./README.md)
