@@ -7,8 +7,8 @@ target: comment_dom_id(@commentable_type, @commentable_id, @offset += 1) do %>
   </div>
   <% if @has_more_comments %>
     <div class="flex items-center min-w-full">
-      <a href="<%= "/comments/#{@commentable_type}/#{@commentable_id}?offset=#{@offset}" %>"
-      class="min-w-full text-center click-hide text-md">Show more</a>
+      <%= link_to 'Show more', url_for(params.permit!.merge(offset: @offset)),
+        class: 'min-w-full text-center click-hide text-md' %>
     </div>
     <%= turbo_frame_tag comment_dom_id(@commentable_type, @commentable_id, @offset),
       target: comment_dom_id(@commentable_type, @commentable_id, @offset += 1) %>

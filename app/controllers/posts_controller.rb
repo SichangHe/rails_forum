@@ -6,7 +6,6 @@ class PostsController < ApplicationController
   before_action :assert_votable, only: %i[like dislike]
 
   # GET /posts or /posts.json
-  # TODO: fix search offset
   def index
     q = params[:q]
     if q&.key?(:title_or_content_body_cont_any) && (

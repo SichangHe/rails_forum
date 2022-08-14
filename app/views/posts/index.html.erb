@@ -11,7 +11,9 @@
     </div>
     <% if @has_more_posts %>
       <div class="flex items-center min-w-full">
-        <a href="/posts?offset=<%= @offset %>" class="min-w-full text-center border-b click-hide text-md">Show more</a>
+        <%= link_to 'Show more',
+          url_for(params.permit!.merge(offset: @offset)),
+          class: 'min-w-full text-center border-b click-hide text-md' %>
       </div>
       <%= turbo_frame_tag "#{@offset}offset", target: "#{@offset += 1}offset" %>
     <% end %>
