@@ -9,13 +9,18 @@
         <%= turbo_frame_tag "#{base_id}_comments_button",
           target: comment_dom_id('Comment', comment.id, 0) do %>
           <%= link_to pluralize(comments_num, 'comment'),
-            comment.comments_path, class: 'mr-2 text-blue-600 click-disable' %>
+            comment.comments_path, class: 'ml-2 text-blue-600 click-disable' %>
         <% end %>
+      <% end %>
+      <% if action_name == 'show' %>
+        <%= link_to 'Comment target', comment.commentable, target: '_top', class: 'ml-2 text-blue-600' %>
+      <% else %>
+        <%= link_to 'Show', comment_path(comment), target: '_top', class: 'ml-2 text-blue-600' %>
       <% end %>
       <% if comment.mutable_to? current_user %>
         <%= link_to 'Edit', edit_comment_path(comment),
-          class: 'text-blue-600' %>
-        <div class="inline-block m-2">
+          class: 'ml-2 text-blue-600' %>
+        <div class="inline-block ml-2">
           <%= button_to 'Delete', comment_path(comment), method: :delete,
             class: 'text-blue-600' %>
         </div>
@@ -23,7 +28,7 @@
       <% if current_user; new_comment = new_comment_dom_id('Comment', comment.id) %>
         <%= turbo_frame_tag "#{base_id}new_comment_button",
         target: new_comment do %>
-          <%= link_to 'Reply', comment.new_comments_path, class: 'text-blue-600' %>
+          <%= link_to 'Reply', comment.new_comments_path, class: 'ml-2 text-blue-600' %>
           <%= turbo_frame_tag new_comment, class: 'text-left' %>
         <% end %>
       <% end %>
