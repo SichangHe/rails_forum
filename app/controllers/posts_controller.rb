@@ -24,7 +24,7 @@ class PostsController < ApplicationController
              end
     @posts = @posts.limit(@page_size)
                    .offset(@page_size * @offset)
-                   .includes(:user, :tags, :votes_for)
+                   .includes(:tags, :votes_for, user: [:avatar_blob])
                    .with_rich_text_content
     @has_more_posts = @posts.length == @page_size
     @posts = @posts.select { |post| post.visible_to? current_user }
