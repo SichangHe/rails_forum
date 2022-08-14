@@ -8,15 +8,24 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   # TODO: fix search offset
   def index
+    q = params[:q]
+    if q&.key?(:title_or_content_body_cont_any) && (
+      query = q[:title_or_content_body_cont_any]
+    ).is_a?(String)
+      q[:title_or_content_body_cont_any] = query.split
+    end
     @page_size = 16
     @offset = params[:offset]&.to_i || 0
-    @q = Post.ransack(params[:q])
-    @posts = @q.result
-               .order(created_at: :desc)
-               .limit(@page_size)
-               .offset(@page_size * @offset)
-               .includes(:user, :tags, :votes_for)
-               .with_rich_text_content
+    @q = Post.ransack(q)
+    @posts = if q.nil?
+               Post.order(created_at: :desc)
+             else
+               @q.result(distinct: true)
+             end
+    @posts = @posts.limit(@page_size)
+                   .offset(@page_size * @offset)
+                   .includes(:user, :tags, :votes_for)
+                   .with_rich_text_content
     @has_more_posts = @posts.length == @page_size
     @posts = @posts.select { |post| post.visible_to? current_user }
   end

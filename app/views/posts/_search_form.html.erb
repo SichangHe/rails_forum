@@ -1,6 +1,7 @@
-<span class="flex">
+<span id="header_search_form" class="flex">
   <%= search_form_for q, class: 'flex justify-between' do |form| %>
-    <%= form.search_field :title_or_content_body_cont, class: 'w-full text_field',
+    <%= form.search_field :title_or_content_body_cont_any,
+      id: 'header_search_field', class: 'w-full text_field',
       placeholder: 'Search posts' %>
     <%= button_tag(class: 'mx-2') do %>
       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
