@@ -1,7 +1,7 @@
 <% base_id = comment_dom_id(@commentable_type, @commentable_id, @offset) %>
 <%= turbo_frame_tag base_id,
   target: comment_dom_id(@commentable_type, @commentable_id, @offset += 1) do %>
-  <div id="<%= base_id %>_comments" class="min-w-full p-5 border rounded-lg empty:hidden">
+  <div id="<%= base_id %>_comments" class="min-w-full py-5 pl-5 border-l rounded-lg border-y empty:hidden">
     <% @comments.each do |comment| %>
       <%= render 'show', comment: comment %>
     <% end %>
