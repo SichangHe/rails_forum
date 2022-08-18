@@ -8,7 +8,7 @@
   <% end %>
   <p class="flex justify-between my-5">
     <%= render 'users/preview', user: comment.user %>
-    <%= time_tag comment.created_at, 'data-local': 'time-ago' %>
+    <%= time_tag comment.created_at, 'data-local': 'time-ago', class: 'ml-2' %>
   </p>
   <%= comment.content %>
   <%= render 'votable/votes', votable: comment %>

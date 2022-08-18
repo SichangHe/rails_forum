@@ -66,6 +66,9 @@ group :development, :test do
 
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.4'
+
+  # Ransack for search
+  gem 'ransack', '~> 3.2'
 end
 
 group :development do
